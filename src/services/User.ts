@@ -1,6 +1,5 @@
 import { DBInterface } from '../typings/DbInterface'
 import { UserAttributes } from '../models/User'
-import ErrorGenerator from '../error'
 
 export interface UserFindParams {
   id: string
@@ -18,18 +17,18 @@ export default class User {
       const UsersFound = await this.db.User.findOne({ where: {id: params.id}})
 
       if(!UsersFound){
-        throw new ErrorGenerator('Authentication.rejected').type
+        throw new Error('Authentication.rejected')
       }
 
       return UsersFound.get({plain: true})
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 
   async createIfNotExists(user: UserAttributes): Promise<UserAttributes> {
     if (!user) {
-      throw new ErrorGenerator('Server.internal').type
+      throw new Error('User id required')
     }
 
     try {
@@ -41,7 +40,7 @@ export default class User {
       const newUser = await this.db.User.create(user)
       return newUser.get({plain: true})
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 }
