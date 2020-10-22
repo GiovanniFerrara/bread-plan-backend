@@ -44,6 +44,7 @@ const recipe2 = {
         recipeId: 'bf3eb840-2a22-4f3b-80ed-e77d3f6322e4',
         techniqueId: '6cdb741a-180c-4340-a3cd-f707a7d9171a',
         idealTemperature: 20,
+        duration: 20,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -66,6 +67,7 @@ describe('Mappers should work', () => {
     expect(mapped!.ingredients![0]).toHaveProperty('amount');
     expect(mapped!.techniques![0]).toHaveProperty('id');
     expect(mapped!.techniques![0]).toHaveProperty('idealTemperature');
+    expect(mapped!.techniques![0]).toHaveProperty('duration');
   });
   test('shouldn\t break if having empty recipes or techniques', () => {
     const mapped = mapRecipe(recipe1);

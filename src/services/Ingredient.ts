@@ -2,7 +2,9 @@ import { DBInterface } from '../typings/DbInterface'
 import { IngredientAttributes } from '../models/Ingredient'
 import { mapQueryParams } from './helpers/mapper'
 
-export interface IngredientFindParams extends Partial<IngredientAttributes> {}
+export interface IngredientFindParams extends Omit<Partial<IngredientAttributes>, 'id'> {
+  id?: string | string []
+}
 interface IngredientsData{
   data: IngredientAttributes[]
   count: number

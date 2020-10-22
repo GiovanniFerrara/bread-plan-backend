@@ -2,6 +2,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(
     'RecipeTechnique',
     {
+      id: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+        allowNull: false,
+      },
       recipeId: {
         type: Sequelize.UUID,
         references: {
@@ -25,6 +30,10 @@ module.exports = {
         allowNull: true,
       },
       idealTemperature: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      duration: {
         type: Sequelize.FLOAT,
         allowNull: false,
       },

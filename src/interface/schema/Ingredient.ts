@@ -42,6 +42,14 @@ input RecipeIngredientInput {
 type IngredientInRecipe {
   id: ID!
   amount: Float!
+  user: User
+  title: String
+  imageSrc: String
+  key: String
+  description: String
+  createdAt: String
+  updatedAt: String
+  recipes: [Recipe]
 }
 `;
 export { ingredientTypeDef as default };

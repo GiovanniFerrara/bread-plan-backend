@@ -2,9 +2,11 @@ import * as Sequelize from 'sequelize';
 import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface RecipeTechniqueAttributes {
+  id: string
   recipeId?: string
   techniqueId: string
   idealTemperature: number
+  duration: number
   createdAt?: Date
   updatedAt?: Date
 }
@@ -18,6 +20,11 @@ export const RecipeTechniqueFactory = (
   DataTypes: Sequelize.DataTypes,
 ): Sequelize.Model<RecipeTechniqueInstance, RecipeTechniqueAttributes> => {
   const attributes: SequelizeAttributes<RecipeTechniqueAttributes> = {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
     recipeId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -29,6 +36,10 @@ export const RecipeTechniqueFactory = (
       primaryKey: true,
     },
     idealTemperature: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    duration: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },

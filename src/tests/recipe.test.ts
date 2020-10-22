@@ -42,6 +42,11 @@ export const CREATE_RECIPE = gql`
             id: $techniqueId
             duration: 35
             idealTemperature: 25
+          },
+          {
+            id: $techniqueId
+            duration: 35
+            idealTemperature: 25
           }
         ]
         ingredients: [

@@ -20,6 +20,7 @@ function mapTechnique(technique: techniqueFromDB[]) {
     ...ingredient,
     id: ingredient.RecipeTechnique.techniqueId!,
     idealTemperature: ingredient.RecipeTechnique.idealTemperature!,
+    duration: ingredient.RecipeTechnique.duration!,
   }));
 }
 

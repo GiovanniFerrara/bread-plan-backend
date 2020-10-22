@@ -5,8 +5,10 @@ import { RecipeTechniqueAttributes } from '../models/RecipeTechnique'
 import { mapRecipe, mapQueryParams } from './helpers/mapper'
 import { IngredientAttributes } from '../models/Ingredient'
 import { TechniqueAttributes } from '../models/Technique'
+import { v4 as uuid } from 'uuid'
 
-export interface RecipeFindParams extends Partial<RecipeAttributes> {
+export interface RecipeFindParams extends Omit<Partial<RecipeAttributes>, 'id'> {
+  id?: string | string[]
   page?: number
   limit?: number
 }
@@ -29,6 +31,7 @@ export interface techniqueFromDB extends TechniqueAttributes {
 interface RecipeTechniqueMappedToApi extends Omit<RecipeTechniqueAttributes, 'techniqueId'> {
   id: string
   idealTemperature: number
+  duration: number
 }
 
 interface RecipeIngredientMappedToApi extends Omit<RecipeIngredientAttributes, 'ingredientId'> {
@@ -55,9 +58,9 @@ export default class Recipe {
     this.db = db
     this.eagerAttributes = {
       ingredients: ['key', 'title', 'description'],
-      techniques: ['key', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
+      techniques: ['key', 'title', 'duration', 'standardTemperature', 'videoLink'],
       recipeIngredient: ['amount'],
-      recipeTechnique: ['idealTemperature'],
+      recipeTechnique: ['idealTemperature', 'duration'],
     }
   }
 
@@ -111,18 +114,23 @@ export default class Recipe {
           ingredientId: ing.id,
           amount: ing.amount,
         }))
+
         await this.db.RecipeIngredient.bulkCreate(ingredients)
       }
       if (recipe.techniques && recipe.techniques.length) {
-        const technique = recipe.techniques.map((tech) => ({
+        const techniques = recipe.techniques.map((tech) => ({
+          id: uuid(),
           recipeId: newRecipe.id,
           techniqueId: tech.id,
           idealTemperature: tech.idealTemperature,
+          duration: tech.duration
         }))
-        await this.db.RecipeTechnique.bulkCreate(technique)
+
+        await this.db.RecipeTechnique.bulkCreate(techniques)
       }
       return newRecipe.get({ plain: true })
     } catch (e) {
+      console.log(e)
       throw new Error(e)
     }
   }

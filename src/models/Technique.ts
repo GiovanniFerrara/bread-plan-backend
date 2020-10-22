@@ -2,7 +2,7 @@ import * as Sequelize from 'sequelize';
 import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface TechniqueAttributes {
-  id?: string
+  id: string
   key: string
   title: string
   description: string

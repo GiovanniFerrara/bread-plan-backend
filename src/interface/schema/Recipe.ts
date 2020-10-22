@@ -9,8 +9,8 @@ type Recipe {
   userId: String
   key: String
   title: String!
-  techniques: [Technique]!
-  ingredients: [Ingredient]!
+  techniques: [TechniqueInRecipe]!
+  ingredients: [IngredientInRecipe]!
   user: User
   description: String!
   createdAt: String

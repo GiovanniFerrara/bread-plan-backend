@@ -2,7 +2,9 @@ import { DBInterface } from '../typings/DbInterface'
 import { TechniqueAttributes } from '../models/Technique'
 import { mapQueryParams } from './helpers/mapper'
 
-export interface TechniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
+export interface TechniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink' | 'id'>> {
+  id?: string | string[]
+}
 interface TechniquesData{
   data: TechniqueAttributes[]
   count: number

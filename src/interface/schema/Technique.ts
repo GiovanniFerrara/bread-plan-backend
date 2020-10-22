@@ -11,7 +11,6 @@ type Technique {
   title: String
   key: String
   description: String
-  duration: Float
   standardTemperature: Float
   videoLink: String
   createdAt: String
@@ -23,7 +22,6 @@ input TechniquePayloadInput{
   title: String!
   key: String!
   description: String!
-  duration: Float!
   videoLink: String
   standardTemperature: Float
 } 
@@ -46,8 +44,17 @@ input RecipeTechniqueInput {
 
 type TechniqueInRecipe {
   id: ID!
-  duration: Float!
+  duration: Float
   idealTemperature: Float
+  user: User
+  recipes: [Recipe]
+  title: String
+  key: String
+  description: String
+  standardTemperature: Float
+  videoLink: String
+  createdAt: String
+  updatedAt: String
 }
 
 `;
