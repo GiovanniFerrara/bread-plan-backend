@@ -43,7 +43,6 @@ const CREATE_TECHNIQUE = gql`
         description: "Test description"
         userId: "123456789"
         videoLink: "www.youtube.com"
-        duration: 23
       }
     ) {
       id
@@ -66,8 +65,12 @@ afterEach(async () => {
 })
 
 export const createTechnique = async ()=>{
-  const response = await client.mutate({mutation: CREATE_TECHNIQUE})
-  return response.data.createTechniques[0]
+  try{
+    const response = await client.mutate({mutation: CREATE_TECHNIQUE})
+    return response.data.createTechniques[0]
+  }catch(e){
+    console.log('error in createTechnique: ', JSON.stringify(e, undefined, 2))
+  }
 }
 
 describe('=== TECHNIQUES CREATE MUTATION', () => {

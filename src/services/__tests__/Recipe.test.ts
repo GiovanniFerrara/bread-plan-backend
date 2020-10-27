@@ -28,7 +28,6 @@ const dummyTechnique = {
   key: 'Slap and fold',
   title: 'slap and fold',
   description: 'first slap and then fold',
-  duration: 43,
   standardTemperature: 32,
   videoLink: 'https://you.tu/243423dsdasddds/',
 }
@@ -75,7 +74,7 @@ describe('Test the Recipe service', () => {
         ingredients: ingredientsCreated.map((i) => ({ id: i.id!, amount: 200 })),
         techniques: techniquesCreated.map((technique) => ({
           id: technique.id!,
-          duration: technique.duration!,
+          duration: 32,
           idealTemperature: technique.standardTemperature!,
         })),
       })

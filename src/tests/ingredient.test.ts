@@ -65,8 +65,12 @@ afterEach(async () => {
 })
 
 export const createIngredient = async ()=>{
+  try{
   const response = await client.mutate({mutation: CREATE_INGREDIENT})
   return response.data.createIngredients[0]
+  }catch(e){
+    console.log('error in createTechnique: ', JSON.stringify(e, undefined, 2))
+  }
 }
 
 describe('=== INGREDIENTS CREATE MUTATION', () => {

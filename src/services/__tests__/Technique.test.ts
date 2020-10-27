@@ -8,7 +8,6 @@ const dummyTechnique = {
   key: 'Slap and fold',
   title: 'slap and fold',
   description: 'first slap and then fold',
-  duration: 43,
   standardTemperature: 32,
   videoLink: 'https://you.tu/243423dsdasddds/',
 }

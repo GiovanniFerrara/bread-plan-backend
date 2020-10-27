@@ -2,11 +2,10 @@ import * as Sequelize from 'sequelize';
 import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface TechniqueAttributes {
-  id: string
+  id?: string
   key: string
   title: string
   description: string
-  duration: number
   standardTemperature?: number
   videoLink?: string
   userId?: string
@@ -45,9 +44,6 @@ export const TechniqueFactory = (
     videoLink: {
       type: DataTypes.STRING,
       allowNull: true,
-    },
-    duration: {
-      type: DataTypes.STRING,
     },
   };
 

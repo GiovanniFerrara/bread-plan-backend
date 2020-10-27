@@ -58,7 +58,7 @@ export default class Recipe {
     this.db = db
     this.eagerAttributes = {
       ingredients: ['key', 'title', 'description'],
-      techniques: ['key', 'title', 'duration', 'standardTemperature', 'videoLink'],
+      techniques: ['key', 'title', 'standardTemperature', 'videoLink'],
       recipeIngredient: ['amount'],
       recipeTechnique: ['idealTemperature', 'duration'],
     }
@@ -103,6 +103,7 @@ export default class Recipe {
     }
     try {
       const newRecipe = await this.db.Recipe.create({
+        id: uuid(),
         key: recipe.key!,
         title: recipe.title!,
         description: recipe.description!,
@@ -118,19 +119,21 @@ export default class Recipe {
         await this.db.RecipeIngredient.bulkCreate(ingredients)
       }
       if (recipe.techniques && recipe.techniques.length) {
-        const techniques = recipe.techniques.map((tech) => ({
-          id: uuid(),
-          recipeId: newRecipe.id,
-          techniqueId: tech.id,
-          idealTemperature: tech.idealTemperature,
-          duration: tech.duration
-        }))
+        const techniques = recipe.techniques.map((technique) => {
+          return ({
+            id: uuid(),
+            recipeId: newRecipe.id,
+            techniqueId: technique.id,
+            idealTemperature: technique.idealTemperature,
+            duration: technique.duration
+          })
+        })
 
         await this.db.RecipeTechnique.bulkCreate(techniques)
       }
       return newRecipe.get({ plain: true })
     } catch (e) {
-      console.log(e)
+      console.log(JSON.stringify(e, undefined, 2))
       throw new Error(e)
     }
   }
