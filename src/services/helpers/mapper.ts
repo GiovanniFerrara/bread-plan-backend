@@ -16,11 +16,11 @@ function mapIngredient(ingredients: ingredientFromDB[]) {
 
 function mapTechnique(technique: techniqueFromDB[]) {
   if (!technique || !technique.length) return technique;
-  return technique.map((ingredient) => ({
-    ...ingredient,
-    id: ingredient.RecipeTechnique.techniqueId!,
-    idealTemperature: ingredient.RecipeTechnique.idealTemperature!,
-    duration: ingredient.RecipeTechnique.duration!,
+  return technique.map((technique) => ({
+    ...technique,
+    id: technique.RecipeTechnique.techniqueId!,
+    idealTemperature: technique.RecipeTechnique.idealTemperature!,
+    duration: technique.RecipeTechnique.duration!,
   }));
 }
 
