@@ -29,11 +29,13 @@ export const RecipeTechniqueFactory = (
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      unique: false
     },
     techniqueId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      unique: false,
     },
     idealTemperature: {
       type: DataTypes.FLOAT,
