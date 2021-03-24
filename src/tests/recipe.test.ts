@@ -120,6 +120,5 @@ describe('=== RECIPE QUERY ===', () => {
     expect(recipe.data.recipes.data).toHaveLength(2)
     expect(recipe.data.recipes.data[0].ingredients).toHaveLength(1)
     expect(recipe.data.recipes.data[0].techniques[0].recipes[0]).toHaveProperty('id')
-    expect(recipe.data.recipes.data[0].techniques[0].recipes[0]).toHaveProperty('temperature')
   })
 });
