@@ -1,5 +1,19 @@
-version: "3.2"
+version: "3.7"
 services:
+  postgres-db:
+    container_name: postgres-db
+    image: postgres
+    volumes:
+      - ./db-volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    networks:
+      - app-connect
+
   app:
     container_name: app
     build:
@@ -11,15 +25,10 @@ services:
       - postgres-db
     ports:
       - "4000:4000"
+    networks:
+      - app-connect
 
-  postgres-db:
-    volumes:
-      - ./db-volume:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    image: postgres
-    ports:
-      - "5432:5432"
-    container_name: postgres-db
+
+networks:
+    app-connect:
+        driver: bridge
