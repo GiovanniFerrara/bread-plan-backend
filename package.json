@@ -12,7 +12,7 @@
     "build": "tsc",
     "start": "node dist/src/",
     "build:watch": "tsc -w",
-    "migrations": "npx sequelize db:migrate",
+    "migrations": "npx sequelize-cli db:migrate --url 'postgres://postgres:password@postgres-db/postgres'",
     "migrations:undo": "npx sequelize db:migrate:undo:all",
     "test": "./scripts/test.sh"
   },

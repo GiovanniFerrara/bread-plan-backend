@@ -15,6 +15,4 @@ ENV NODE_ENV=development
 
 EXPOSE 4000
 
-RUN node_modules/.bin/sequelize db:migrate
-
 CMD [ "npm", "run", "dev"]
